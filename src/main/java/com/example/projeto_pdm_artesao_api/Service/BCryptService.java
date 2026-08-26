@@ -6,9 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public abstract class BCryptService {
 	private static final BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
 
-	public BCryptService() {
-	}
-
 	public static @Nullable String encode(@Nullable CharSequence rawPassword) {
 
 		if (rawPassword != null && !rawPassword.isEmpty()) {

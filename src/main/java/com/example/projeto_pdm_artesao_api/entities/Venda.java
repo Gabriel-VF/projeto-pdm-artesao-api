@@ -41,7 +41,9 @@ public class Venda {
 	@JoinColumn(name = "vendedor_id", nullable = false)
 	private Vendedor vendedor;
 
-	
+	public Venda() {
+	}
+
 	public Venda(Long vendaId, LocalDateTime dataHora, Double valor, Artesao artesao, List<Produto> produtosPorVenda,
 			Vendedor vendedor) {
 		this.vendaId = vendaId;

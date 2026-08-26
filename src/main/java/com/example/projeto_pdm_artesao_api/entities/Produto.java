@@ -38,6 +38,8 @@ public class Produto {
 	@JoinColumn(name = "artesao_id", nullable = false)
 	private Artesao artesao;
 
+	public Produto() {
+	}
 
 	public Produto(Long id, String nome, String descricao, Double preco, Integer quantidadeEstoque, String qrCodeId,
 			Artesao artesao) {

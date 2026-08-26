@@ -37,7 +37,9 @@ public class Artesao {
 
 	@OneToMany(mappedBy = "artesao", cascade = CascadeType.ALL)
 	private List<Produto> produtos;
-	
+
+	public Artesao() {
+	}
 
 		public Artesao(Long id, String nome, String telefone, String identificacao, String usuario, String senha,
 			List<Produto> produtos) {

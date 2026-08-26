@@ -1,0 +1,20 @@
+# IDE/editor
+.vscode/
+.idea/
+*.iml
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+
+# Build and generated files
+target/
+build/
+out/
+*.class
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

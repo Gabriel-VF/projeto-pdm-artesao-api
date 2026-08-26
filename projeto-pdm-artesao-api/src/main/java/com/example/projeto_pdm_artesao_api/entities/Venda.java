@@ -40,4 +40,64 @@ public class Venda {
 	@ManyToOne
 	@JoinColumn(name = "vendedor_id", nullable = false)
 	private Vendedor vendedor;
+
+	
+	public Venda(Long vendaId, LocalDateTime dataHora, Double valor, Artesao artesao, List<Produto> produtosPorVenda,
+			Vendedor vendedor) {
+		this.vendaId = vendaId;
+		this.dataHora = dataHora;
+		this.valor = valor;
+		this.artesao = artesao;
+		this.produtosPorVenda = produtosPorVenda;
+		this.vendedor = vendedor;
+	}
+
+	public Long getVendaId() {
+		return vendaId;
+	}
+
+	public void setVendaId(Long vendaId) {
+		this.vendaId = vendaId;
+	}
+
+	public LocalDateTime getDataHora() {
+		return dataHora;
+	}
+
+	public void setDataHora(LocalDateTime dataHora) {
+		this.dataHora = dataHora;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Artesao getArtesao() {
+		return artesao;
+	}
+
+	public void setArtesao(Artesao artesao) {
+		this.artesao = artesao;
+	}
+
+	public List<Produto> getProdutosPorVenda() {
+		return produtosPorVenda;
+	}
+
+	public void setProdutosPorVenda(List<Produto> produtosPorVenda) {
+		this.produtosPorVenda = produtosPorVenda;
+	}
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+	
 }

@@ -38,4 +38,85 @@ public class Artesao {
 	@OneToMany(mappedBy = "artesao", cascade = CascadeType.ALL)
 	private List<Produto> produtos;
 	
+
+		public Artesao(Long id, String nome, String telefone, String identificacao, String usuario, String senha,
+			List<Produto> produtos) {
+		this.id = id;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.identificacao = identificacao;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.produtos = produtos;
+	}
+
+		public Long getId() {
+			return id;
+		}
+
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+
+		public String getNome() {
+			return nome;
+		}
+
+
+		public void setNome(String nome) {
+			this.nome = nome;
+		}
+
+
+		public String getTelefone() {
+			return telefone;
+		}
+
+
+		public void setTelefone(String telefone) {
+			this.telefone = telefone;
+		}
+
+
+		public String getIdentificacao() {
+			return identificacao;
+		}
+
+
+		public void setIdentificacao(String identificacao) {
+			this.identificacao = identificacao;
+		}
+
+
+		public String getUsuario() {
+			return usuario;
+		}
+
+
+		public void setUsuario(String usuario) {
+			this.usuario = usuario;
+		}
+
+
+		public String getSenha() {
+			return senha;
+		}
+
+
+		public void setSenha(String senha) {
+			this.senha = senha;
+		}
+
+
+		public List<Produto> getProdutos() {
+			return produtos;
+		}
+
+
+		public void setProdutos(List<Produto> produtos) {
+			this.produtos = produtos;
+		}
+	
 }

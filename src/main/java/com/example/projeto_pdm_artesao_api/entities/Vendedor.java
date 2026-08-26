@@ -10,20 +10,31 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+/**
+ * This Class may be redundant; Artesao already act as Seller 
+ */
+
+
 @Entity
 @Table(name = "vendedor")
 public class Vendedor {
+
 	@Id
 	@Column(name = "vendedor_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "nome", nullable = false)
 	private String nome;
+
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
+
 	@Column(name = "senha", nullable = false)
 	private String senha;
 
 	@OneToMany(mappedBy = "vendedor")
 	private List<Venda> vendas;
+
 }

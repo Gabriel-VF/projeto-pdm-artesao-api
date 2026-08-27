@@ -1,4 +1,4 @@
-package com.example.projeto_pdm_artesao_api.Service;
+package com.example.projeto_pdm_artesao_api.service;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

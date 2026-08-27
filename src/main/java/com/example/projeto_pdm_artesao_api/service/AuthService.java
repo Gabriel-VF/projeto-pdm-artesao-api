@@ -1,11 +1,14 @@
-import com.example.projeto_pdm_artesao_api.DTO.ArtesaoCreateDTO;
-import com.example.projeto_pdm_artesao_api.DTO.ArtesaoResponse;
-import com.example.projeto_pdm_artesao_api.Entity.Artesao;
-import com.example.projeto_pdm_artesao_api.Repository.ArtesaoRepository;
+package com.example.projeto_pdm_artesao_api.service;
+
+import com.example.projeto_pdm_artesao_api.dto.ArtesaoCreateDTO;
+import com.example.projeto_pdm_artesao_api.dto.ArtesaoResponse;
+import com.example.projeto_pdm_artesao_api.entities.Artesao;
+import com.example.projeto_pdm_artesao_api.repositories.ArtesaoRepository;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Service
 public class AuthService {
 
     private final ArtesaoRepository artesaoRepository;
@@ -29,7 +32,7 @@ public class AuthService {
 
         artesao.setNome(dto.nome());
         artesao.setTelefone(dto.telefone());
-        artesao.setIdentificacao(dtp.identificacao());
+        artesao.setIdentificacao(dto.identificacao());
         artesao.setEmail(dto.email());
 
         String senhaHash = passwordEncoder.encode(dto.senha());

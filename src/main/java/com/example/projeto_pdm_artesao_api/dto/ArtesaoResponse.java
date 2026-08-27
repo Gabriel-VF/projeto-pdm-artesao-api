@@ -4,6 +4,6 @@ public record ArtesaoResponse(
     String nome,
     String telefone,
     String identificacao,
-    String usuario
+    String email
     
 ) {}

@@ -3,7 +3,7 @@ public record ArtesaoCreateDTO(
     @NotBlank String nome,
     String telefone,
     @NotBlank String identificacao,
-    @NotBlank String usuario,
+    @NotBlank String email,
     @NotBlanck String senha
     
 ) {}

@@ -29,8 +29,8 @@ public class Artesao {
 	@Column(name = "identificacao", nullable = false) // identification (CPF/RG/CNPJ), may remove later
 	private String identificacao;
 
-	@Column(name = "usuario", nullable = false) // username for login, may change to email later
-	private String usuario;
+	@Column(name = "email", nullable = false)
+	private String email;
 
 	@Column(name = "senha", nullable = false)
 	private String senha;	// Use BCrypt later, compare Hash only
@@ -41,13 +41,13 @@ public class Artesao {
 	public Artesao() {
 	}
 
-		public Artesao(Long id, String nome, String telefone, String identificacao, String usuario, String senha,
+		public Artesao(Long id, String nome, String telefone, String identificacao, String email, String senha,
 			List<Produto> produtos) {
 		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.identificacao = identificacao;
-		this.usuario = usuario;
+		this.email = email;
 		this.senha = senha;
 		this.produtos = produtos;
 	}
@@ -92,13 +92,13 @@ public class Artesao {
 		}
 
 
-		public String getUsuario() {
-			return usuario;
+		public String getEmail() {
+			return email;
 		}
 
 
-		public void setUsuario(String usuario) {
-			this.usuario = usuario;
+		public void setEmail(String email) {
+			this.email = email;
 		}
 
 

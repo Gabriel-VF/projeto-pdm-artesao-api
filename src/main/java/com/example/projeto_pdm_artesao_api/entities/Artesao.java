@@ -26,7 +26,7 @@ public class Artesao {
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
 
-	@Column(name = "identificacao", nullable = false) // identification (CPF/RG/CNPJ), may remove later
+	@Column(name = "identificacao", nullable = false, unique = true) // identification (CPF/RG/CNPJ), may remove later
 	private String identificacao;
 
 	@Column(name = "email", nullable = false)

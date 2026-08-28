@@ -6,3 +6,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProjetoPdmArtesaoApiApplicationTests {
 }
+
+// ss -tlnp | grep ':8080'

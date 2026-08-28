@@ -2,6 +2,8 @@ package com.example.projeto_pdm_artesao_api.service;
 
 import com.example.projeto_pdm_artesao_api.dto.ArtesaoCreateDTO;
 import com.example.projeto_pdm_artesao_api.dto.ArtesaoResponse;
+import com.example.projeto_pdm_artesao_api.dto.AuthResponse;
+import com.example.projeto_pdm_artesao_api.dto.LoginRequest;
 import com.example.projeto_pdm_artesao_api.entities.Artesao;
 import com.example.projeto_pdm_artesao_api.repositories.ArtesaoRepository;
 
@@ -13,13 +15,16 @@ public class AuthService {
 
     private final ArtesaoRepository artesaoRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public AuthService( // constructor DI
         ArtesaoRepository artesaoRepository,
-        PasswordEncoder passwordEncoder
+        PasswordEncoder passwordEncoder,
+        JwtService jwtService
     ) {
         this.artesaoRepository = artesaoRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public ArtesaoResponse cadastrar(ArtesaoCreateDTO dto) {
@@ -47,6 +52,35 @@ public class AuthService {
             salvo.getTelefone(),
             salvo.getIdentificacao(),
             salvo.getEmail()
+        );
+    }
+
+    public AuthResponse login(LoginRequest dto) {
+
+        Artesao artesao = artesaoRepository
+                .findByEmail(dto.email())
+                .orElseThrow(()-> 
+                new RuntimeException(
+                    "E-mail ou senha inválidos"
+                )
+            );
+
+        boolean senhaValida = passwordEncoder.matches(
+            dto.senha(), artesao.getSenha()
+        );
+
+        if (!senhaValida) {
+            throw new RuntimeException(
+                "E-mail ou senha inválidos"
+            );
+        }
+
+        String token = jwtService.generateToken(artesao);
+
+        return new AuthResponse(
+            token,
+            artesao.getId(),
+            artesao.getNome()
         );
     }
 }

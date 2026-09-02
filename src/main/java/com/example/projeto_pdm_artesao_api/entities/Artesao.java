@@ -33,7 +33,7 @@ public class Artesao {
 	private String email;
 
 	@Column(name = "senha", nullable = false)
-	private String senha;	// Use BCrypt later, compare Hash only
+	private String senha;
 
 	@OneToMany(mappedBy = "artesao", cascade = CascadeType.ALL)
 	private List<Produto> produtos;

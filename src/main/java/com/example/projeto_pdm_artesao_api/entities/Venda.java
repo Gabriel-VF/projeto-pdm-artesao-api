@@ -1,7 +1,6 @@
 package com.example.projeto_pdm_artesao_api.entities;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,95 +10,104 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "venda")
 public class Venda {
 
-	@Id
-	@Column(name = "venda_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long vendaId;
+    @Id
+    @Column(name = "venda_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long vendaId;
 
-	@Column(name="dataHora", nullable = false)
-	private LocalDateTime dataHora; // registry time of a new sale
+    @Column(name = "dataHora", nullable = false)
+    private LocalDateTime dataHora;
 
-	@Column(name = "valor", nullable = false)
-	private Double valor;
+    @Column(name = "valor", nullable = false)
+    private Double valor;
 
-	@ManyToOne(fetch = FetchType.LAZY) // fetch type lazy to load dynamically
-	@JoinColumn(name = "artesao_id", nullable = false) // Many sales mapped to one artisan
-	private Artesao artesao;
+    @Column(name = "quantidade", nullable = false)
+    private Integer quantidade;
 
-	@OneToMany
-	@JoinColumn(name = "produto_id", nullable = false) // one sale may be composed by one or more products
-	private List<Produto> produtosPorVenda;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "artesao_id", nullable = false)
+    private Artesao artesao;
 
-	@ManyToOne
-	@JoinColumn(name = "vendedor_id", nullable = false)
-	private Vendedor vendedor;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "produto_id", nullable = false)
+    private Produto produto;
 
-	public Venda() {
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vendedor_id", nullable = true)
+    private Vendedor vendedor;
 
-	public Venda(Long vendaId, LocalDateTime dataHora, Double valor, Artesao artesao, List<Produto> produtosPorVenda,
-			Vendedor vendedor) {
-		this.vendaId = vendaId;
-		this.dataHora = dataHora;
-		this.valor = valor;
-		this.artesao = artesao;
-		this.produtosPorVenda = produtosPorVenda;
-		this.vendedor = vendedor;
-	}
+    public Venda() {
+    }
 
-	public Long getVendaId() {
-		return vendaId;
-	}
+    public Venda(Long vendaId, LocalDateTime dataHora, Double valor, Integer quantidade, Artesao artesao, Produto produto, Vendedor vendedor) {
+        this.vendaId = vendaId;
+        this.dataHora = dataHora;
+        this.valor = valor;
+        this.quantidade = quantidade;
+        this.artesao = artesao;
+        this.produto = produto;
+        this.vendedor = vendedor;
+    }
 
-	public void setVendaId(Long vendaId) {
-		this.vendaId = vendaId;
-	}
+    public Long getVendaId() {
+        return vendaId;
+    }
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
-	}
+    public void setVendaId(Long vendaId) {
+        this.vendaId = vendaId;
+    }
 
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
-	}
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
 
-	public Double getValor() {
-		return valor;
-	}
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    public Double getValor() {
+        return valor;
+    }
 
-	public Artesao getArtesao() {
-		return artesao;
-	}
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
 
-	public void setArtesao(Artesao artesao) {
-		this.artesao = artesao;
-	}
+    public Integer getQuantidade() {
+        return quantidade;
+    }
 
-	public List<Produto> getProdutosPorVenda() {
-		return produtosPorVenda;
-	}
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
 
-	public void setProdutosPorVenda(List<Produto> produtosPorVenda) {
-		this.produtosPorVenda = produtosPorVenda;
-	}
+    public Artesao getArtesao() {
+        return artesao;
+    }
 
-	public Vendedor getVendedor() {
-		return vendedor;
-	}
+    public void setArtesao(Artesao artesao) {
+        this.artesao = artesao;
+    }
 
-	public void setVendedor(Vendedor vendedor) {
-		this.vendedor = vendedor;
-	}
-	
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
 }

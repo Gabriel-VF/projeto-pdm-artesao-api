@@ -16,6 +16,8 @@ public record ProdutoCreateDTO(
 
         @NotNull
         @PositiveOrZero
-        Integer quantidadeEstoque
+        Integer quantidadeEstoque,
+
+        @NotBlank String qrCodeId
 
 ) {}

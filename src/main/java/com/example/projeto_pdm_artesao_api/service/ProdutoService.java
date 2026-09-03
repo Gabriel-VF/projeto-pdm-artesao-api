@@ -1,10 +1,10 @@
 package com.example.projeto_pdm_artesao_api.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.projeto_pdm_artesao_api.dto.ProdutoCreateDTO;
 import com.example.projeto_pdm_artesao_api.dto.ProdutoResponse;
@@ -42,9 +42,14 @@ public class ProdutoService {
     }
 
 
+    @Transactional
     public ProdutoResponse criar(ProdutoCreateDTO dto) {
 
         Artesao artesao = getArtesaoAutenticado();
+
+        if (produtoRepository.existsByQrCodeId(dto.qrCodeId())) {
+            throw new RuntimeException("QR Code já cadastrado");
+        }
 
         Produto produto = new Produto();
         
@@ -52,11 +57,7 @@ public class ProdutoService {
         produto.setDescricao(dto.descricao());
         produto.setPreco(dto.preco());
         produto.setQuantidadeEstoque(dto.quantidadeEstoque());
-
-        produto.setQrCodeId(
-            UUID.randomUUID().toString()
-        );
-
+        produto.setQrCodeId(dto.qrCodeId());
         produto.setArtesao(artesao);
 
         Produto salvo = produtoRepository.save(produto);

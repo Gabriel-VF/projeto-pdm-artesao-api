@@ -15,10 +15,4 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
     boolean existsByQrCodeId(String qrCodeId);
 
-    Optional<Produto> findByNome(String nome);
-    Optional<Produto> findByCodigo(String codigo);
-    Optional<Produto> findByPreco(Double preco);
-    Optional<Produto> findByQuantidadeEstoque(Integer quantidadeEstoque);
-    Optional<Produto> findByDescricao(String descricao);
-
 }

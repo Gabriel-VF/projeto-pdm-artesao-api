@@ -19,27 +19,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
+    private final JwtService jwtService;
+    private final ArtesaoRepository artesaoRepository;
+
+    public SecurityConfig(JwtService jwtService, ArtesaoRepository artesaoRepository) {
+        this.jwtService = jwtService;
+        this.artesaoRepository = artesaoRepository;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(
-            JwtService jwtService,
-            ArtesaoRepository artesaoRepository
-    ) {
-        return new JwtAuthenticationFilter(
-                jwtService,
-                artesaoRepository
-        );
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http,
-            JwtAuthenticationFilter jwtAuthenticationFilter
+            HttpSecurity http
     ) throws Exception {
+
+        JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtService, artesaoRepository);
 
         http
             .csrf(csrf -> csrf.disable())
@@ -60,7 +58,7 @@ public class SecurityConfig {
             )
 
             .addFilterBefore(
-                jwtAuthenticationFilter,
+                jwtFilter,
                 UsernamePasswordAuthenticationFilter.class
             );
 

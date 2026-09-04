@@ -54,6 +54,8 @@ public class JwtAuthenticationFilter
             String email =
                     jwtService.extractEmail(token);
 
+            System.out.println("DEBUG: Token extraído para o email: " + email);
+
             Artesao artesao =
                     artesaoRepository
                             .findByEmail(email)
@@ -72,10 +74,14 @@ public class JwtAuthenticationFilter
                 SecurityContextHolder
                         .getContext()
                         .setAuthentication(authentication);
+                
+                System.out.println("DEBUG: Autenticação setada no contexto para: " + email);
+            } else {
+                System.out.println("DEBUG: Artesão nulo ou token inválido para: " + email);
             }
 
         } catch (Exception e) {
-
+            System.err.println("DEBUG: Erro ao validar token: " + e.getMessage());
             SecurityContextHolder.clearContext();
         }
 

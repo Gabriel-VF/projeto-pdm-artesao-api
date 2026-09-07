@@ -8,6 +8,7 @@ public record ProdutoResponse(
         Double preco,
         Integer quantidadeEstoque,
         String qrCodeId,
-        Long artesaoId
+        Long artesaoId,
+        Boolean ativo
 
 ) {}

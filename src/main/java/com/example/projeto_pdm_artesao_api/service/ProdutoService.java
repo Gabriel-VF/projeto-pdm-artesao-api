@@ -71,7 +71,7 @@ public class ProdutoService {
         Artesao artesao = getArtesaoAutenticado();
 
         Produto produto = produtoRepository
-                .findByIdAndArtesaoId(
+                .findByIdAndArtesaoIdAndAtivoTrue(
                         id,
                         artesao.getId()
                 )
@@ -90,7 +90,7 @@ public class ProdutoService {
         Artesao artesao = getArtesaoAutenticado();
 
         return produtoRepository
-                .findByArtesaoId(artesao.getId())
+                .findByArtesaoIdAndAtivoTrue(artesao.getId())
                 .stream()
                 .map(this::toResponse)
                 .toList();
@@ -105,7 +105,7 @@ public class ProdutoService {
         Artesao artesao = getArtesaoAutenticado();
 
         Produto produto = produtoRepository
-                .findByIdAndArtesaoId(id, artesao.getId())
+                .findByIdAndArtesaoIdAndAtivoTrue(id, artesao.getId())
                 .orElseThrow(() ->
                         new RuntimeException(
                                 "Produto não encontrado"
@@ -136,19 +136,21 @@ public class ProdutoService {
     }
 
 
+    @Transactional
     public void deletar(Long id) {
 
         Artesao artesao = getArtesaoAutenticado();
 
         Produto produto = produtoRepository
-                .findByIdAndArtesaoId(id, artesao.getId())
+                .findByIdAndArtesaoIdAndAtivoTrue(id, artesao.getId())
                 .orElseThrow(() ->
                         new RuntimeException(
                                 "Produto não encontrado"
                         )
                 );
 
-        produtoRepository.delete(produto);
+        produto.setAtivo(false);
+        produtoRepository.save(produto);
     }
 
 
@@ -161,7 +163,8 @@ public class ProdutoService {
                 produto.getPreco(),
                 produto.getQuantidadeEstoque(),
                 produto.getQrCodeId(),
-                produto.getArtesao().getId()
+                produto.getArtesao().getId(),
+                produto.getAtivo()
         );
     }
 }

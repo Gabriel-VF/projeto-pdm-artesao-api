@@ -38,6 +38,10 @@ public class VendaService {
         Produto produto = produtoRepository.findById(dto.produtoId())
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
+        if (!produto.getAtivo()) {
+            throw new RuntimeException("Produto inativo e não pode ser vendido");
+        }
+
         if (produto.getQuantidadeEstoque() < dto.quantidade()) {
             throw new RuntimeException("Estoque insuficiente. Disponível: " + produto.getQuantidadeEstoque());
         }

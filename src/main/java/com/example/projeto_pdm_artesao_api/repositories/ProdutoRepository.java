@@ -9,9 +9,9 @@ import com.example.projeto_pdm_artesao_api.entities.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
-    List<Produto> findByArtesaoId(Long artesaoId);
+    List<Produto> findByArtesaoIdAndAtivoTrue(Long artesaoId);
 
-    Optional<Produto> findByIdAndArtesaoId(Long id, Long artesaoId);
+    Optional<Produto> findByIdAndArtesaoIdAndAtivoTrue(Long id, Long artesaoId);
 
     boolean existsByQrCodeId(String qrCodeId);
 

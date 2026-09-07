@@ -34,6 +34,9 @@ public class Produto {
 	@Column(name = "qr_code_id", unique = true, nullable = false)
 	private String qrCodeId;
 
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo = true;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "artesao_id", nullable = false)
 	private Artesao artesao;
@@ -106,6 +109,14 @@ public class Produto {
 
 	public void setArtesao(Artesao artesao) {
 		this.artesao = artesao;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 	
 }
